@@ -1,0 +1,16 @@
+[30;1m2023-11-29 10:54:42[0m [31mERROR   [0m [35mchatgpt_logger[0m -> Error processing message: 'str' object has no attribute 'text'
+[30;1m2023-11-29 11:05:17[0m [31mERROR   [0m [35mchatgpt_logger[0m -> Error processing message: 'str' object has no attribute 'value'
+[30;1m2023-11-29 13:50:10[0m [31mERROR   [0m [35mchatgpt_logger[0m -> Error processing message: 400 Bad Request: The browser (or proxy) sent a request that this server could not understand.
+[30;1m2023-11-29 13:50:32[0m [31mERROR   [0m [35mchatgpt_logger[0m -> Error processing message: 400 Bad Request: The browser (or proxy) sent a request that this server could not understand.
+[30;1m2023-11-29 14:01:06[0m [31mERROR   [0m [35mchatgpt_logger[0m -> Error processing message: 400 Bad Request: The browser (or proxy) sent a request that this server could not understand.
+[30;1m2023-11-29 14:18:19[0m [31mERROR   [0m [35mchatgpt_logger[0m -> Error processing message: 400 Bad Request: The browser (or proxy) sent a request that this server could not understand.
+[30;1m2023-11-29 14:36:34[0m [31mERROR   [0m [35mchatgpt_logger[0m -> Error processing message: 400 Bad Request: The browser (or proxy) sent a request that this server could not understand.
+[30;1m2023-11-30 04:28:04[0m [31mERROR   [0m [35mchatgpt_logger[0m -> Error processing message: 400 Bad Request: Failed to decode JSON object: Expecting value: line 1 column 1 (char 0)
+[30;1m2023-11-30 04:29:21[0m [31mERROR   [0m [35mchatgpt_logger[0m -> Error processing message: 400 Bad Request: Failed to decode JSON object: Expecting value: line 1 column 1 (char 0)
+[30;1m2023-11-30 04:33:06[0m [31mERROR   [0m [35mchatgpt_logger[0m -> Error processing message: 400 Bad Request: Failed to decode JSON object: Expecting value: line 1 column 1 (char 0)
+[30;1m2023-11-30 04:34:21[0m [31mERROR   [0m [35mchatgpt_logger[0m -> Error processing message: 400 Bad Request: Failed to decode JSON object: Expecting value: line 1 column 1 (char 0)
+[30;1m2023-11-30 04:34:55[0m [31mERROR   [0m [35mchatgpt_logger[0m -> Error processing message: 400 Bad Request: Failed to decode JSON object: Expecting value: line 1 column 1 (char 0)
+[30;1m2023-11-30 04:37:36[0m [31mERROR   [0m [35mchatgpt_logger[0m -> Error processing message: 400 Bad Request: Failed to decode JSON object: Expecting value: line 1 column 1 (char 0)
+[30;1m2023-11-30 04:44:43[0m [31mERROR   [0m [35mchatgpt_logger[0m -> Error processing message: Incorrect API key provided: sk-sKnSo***************************************ak74. You can find your API key at https://platform.openai.com/account/api-keys.
+[30;1m2023-11-30 04:45:56[0m [31mERROR   [0m [35mchatgpt_logger[0m -> Error processing message: Incorrect API key provided: sk-sKnSo***************************************ak74. You can find your API key at https://platform.openai.com/account/api-keys.
+[30;1m2023-11-30 04:48:30[0m [31mERROR   [0m [35mchatgpt_logger[0m -> Error processing message: Incorrect API key provided: sk-sKnSo***************************************ak74. You can find your API key at https://platform.openai.com/account/api-keys.
