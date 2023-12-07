@@ -3,6 +3,10 @@
 		{
 			"name": "ChatGPT-bot-in-python",
 			"path": "."
+		},
+		{
+			"name": "templates",
+			"path": "../../../Downloads/GPT-Bot/templates"
 		}
 	],
 	"settings": {}

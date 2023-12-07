@@ -1,6 +1,10 @@
 {
 	"folders": [
 		{
+			"name": "templates",
+			"path": "../../../Downloads/GPT-Bot/templates"
+		},
+		{
 			"name": "ChatGPT-bot-in-python",
 			"path": "."
 		}
