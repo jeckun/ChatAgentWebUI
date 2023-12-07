@@ -1,17 +1,20 @@
 import os
 from flask import request, jsonify, render_template
 
+# from fastapi import HTTPException
+# from fastapi.templating import Jinja2Templates
+
 from src.logger import logger
 from src.chatgpt import ChatGPT, DALLE
 from src.models import OpenAIModel
 from src.memory import Memory
 
-OPENAI_API_KEY=""
-ORGANIZATION_ID=""
+OPENAI_API_KEY="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"
+# ORGANIZATION_ID="org-ZbiWh6oHbybuxLZiipNt7axC"
 ORGANIZATION_ID=""
 OPENAI_MODEL_ENGINE="gpt-3.5-turbo"
 SYSTEM_MESSAGE="You are a helpful assistant."
-PROXY="【换成你自己的代理服务器网址】/v1/"
+PROXY="https://chatgpt-api-proxy.cc/v1/"
 
 models = OpenAIModel(api_key=OPENAI_API_KEY,
                      organization_id=ORGANIZATION_ID,
@@ -21,15 +24,20 @@ memory = Memory(system_message=SYSTEM_MESSAGE)
 chatgpt = ChatGPT(models, memory)
 dalle = DALLE(models)
 
+# 初始化 Jinja2 模板引擎
+# templates = Jinja2Templates(directory="templates")
+
 # 处理用户点击菜单跳转不同页面
 def index():
   return render_template('index.html', active_menu='home')
 
 def about():
   return render_template('about.html', active_menu='about')
+  # return templates.TemplateResponse("index.html", {"request": request, "active_menu": "about"})
 
 def personal():
   return render_template('personal.html', active_menu='personal')
+  # return templates.TemplateResponse("index.html", {"request": request, "active_menu": "personal"})
 
 # 处理聊天界面用户交互
 def send_message():

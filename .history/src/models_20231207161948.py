@@ -25,6 +25,8 @@ class OpenAIModel(ModelInterface):
           organization=organization_id,
           base_url=proxy
       )
+      # openai.api_key = api_key
+      # openai.base_url = proxy
       self.model_engine = model_engine
       self.image_size = image_size
 

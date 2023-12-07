@@ -11,7 +11,7 @@ ORGANIZATION_ID=""
 ORGANIZATION_ID=""
 OPENAI_MODEL_ENGINE="gpt-3.5-turbo"
 SYSTEM_MESSAGE="You are a helpful assistant."
-PROXY="【换成你自己的代理服务器网址】/v1/"
+PROXY="https://chatgpt-api-proxy.cc/v1/"
 
 models = OpenAIModel(api_key=OPENAI_API_KEY,
                      organization_id=ORGANIZATION_ID,

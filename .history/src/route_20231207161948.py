@@ -1,7 +1,21 @@
 from flask import Flask
+# from fastapi import FastAPI, Request
 import src.views as views
 
 app = Flask('ChatGPT-Bot')
+# app = FastAPI()
+
+# @app.get('/')
+# async def home(request: Request):
+#     return views.index(request)
+
+# @app.get('/about')
+# async def about(request: Request):
+#     return views.about(request)
+
+# @app.get('/personal')
+# async def personal(request: Request):
+#     return views.personal(request)
 
 app.add_url_rule('/', 'home', views.index)
 app.add_url_rule('/about', 'about', views.about)
