@@ -15,7 +15,9 @@ API Key 获取地址： https://platform.openai.com/api-keys
 ## 开发计划
 
 1、制作 Dorker 镜像，实现一键部署。   ——  完成
+
 2、增加国内使用的 ChatGPT API Proxy，实现在国内用户快速部署与使用。  —— 完成
+
 3、实现流式输出，将服务端消息一个一个传回来，就像 ChatGPT 自己的聊天方式一样。
 
 ## 修改代理
@@ -27,7 +29,9 @@ PROXY="【换成你自己的代理服务器网址】/v1/"
 
 ## 发布更新
 2023-11-30 在 Replit 上首次发布
+
 2023-12-04 解决一次多次会话后会Token超过限制的问题。
+
 2023-12-07 实现 ChatGPT API Proxy ，可以部署在国内了。实现OpenAi==1.3.7接口。
 
 ## About
@@ -42,7 +46,9 @@ Please set your OpenAI's API keys first.
 
 ## Log
 2023-11-30 Published and The issue of invalid storage of OpenAI API keys has been resolved.
+
 2023-12-04 Resolved the issue of token exceeding the limit after multiple sessions in a single interaction.
+
 2023-12-07 Implemented ChatGPT API Proxy, now deployable in China. Upgraded to OpenAI 1.3.7.
 
 ## Effect
