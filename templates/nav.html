@@ -1,0 +1,45 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/" style="display: flex; align-items: center;">
+      <img src="https://pub-ea398b99a11f43da9bf5018ccba88f05.r2.dev/favicon.svg" alt="Logo" height="30" style="margin-right: 5px;">ChatGPT Bot in Python</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+  <!-- 菜单 -->
+  <div class="collapse navbar-collapse justify-content-end" id="navbarScroll">
+    <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+      <li class="{% if active_menu == 'home' %} nav-item active font-weight-bold {% endif %} nav-item">
+        <a class="nav-link" href="/">Home</a>
+      </li>
+      <li class="{% if active_menu == 'about' %} nav-item active font-weight-bold {% endif %} nav-item">
+        <a class="nav-link" href="/about">About us</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="display: flex; align-items: center;">
+          <img class="Avatar" src="https://pub-ea398b99a11f43da9bf5018ccba88f05.r2.dev/discord-logo.webp" alt="头像" height="25px" style="border-radius: 50%">
+        </a>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="/personal" style="display: flex; align-items: center;" >
+            <img class="personal" src="https://pub-ea398b99a11f43da9bf5018ccba88f05.r2.dev/person-badge-fill.svg" style="height:20px; width:20px;">
+            <span class="ml-1">Personal inf</span>
+          </a></li>
+          <li>
+            <a class="dropdown-item" href="#" style="display: flex; align-items: center;" id="settingItem">
+              <img class="setting" src="https://pub-ea398b99a11f43da9bf5018ccba88f05.r2.dev/settings.svg" style="height:25px; width:25px;">
+              <span class="ml-1">Setting</span>
+            </a>
+          </li>
+          <li><hr class="dropdown-divider"></li>
+          <li>
+            <a class="dropdown-item" href="#" style="display: flex; align-items: center;" >
+              <img class="exit" src="https://pub-ea398b99a11f43da9bf5018ccba88f05.r2.dev/escape.svg" style="height:20px; width:20px;">
+              <span class="ml-1">Exit</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</nav>
+

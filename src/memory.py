@@ -1,5 +1,5 @@
 from typing import Dict
-from collections import defaultdict
+from collections import defaultdict, deque
 
 
 class MemoryInterface:
@@ -14,23 +14,23 @@ class MemoryInterface:
 
 
 class Memory(MemoryInterface):
-    def __init__(self, system_message):
-        self.storage = defaultdict(list)
+    def __init__(self, system_message, max_history=10):
+        self.storage = defaultdict(deque)        # 使用先进先出队列（FIFO）处理历史对话记录过长的问题
         self.system_message = system_message
+        self.max_history = max_history
 
     def initialize(self, user_id: str):
-        self.storage[user_id] = [{
+        self.storage[user_id] = deque([{
             'role': 'system', 'content': self.system_message
-        }]
+        }], maxlen=self.max_history)
 
     def append(self, user_id: str, message: Dict) -> None:
-        print(user_id)
-        if self.storage[user_id] == []:
+        if not self.storage[user_id]:
             self.initialize(user_id)
         self.storage[user_id].append(message)
 
     def get(self, user_id: str) -> str:
-        return self.storage[user_id]
+        return list(self.storage[user_id])
 
     def remove(self, user_id: str) -> None:
-        self.storage[user_id] = []
+        self.storage[user_id].clear()

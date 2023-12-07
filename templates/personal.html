@@ -1,0 +1,90 @@
+{% include 'head.html' %}
+<body>
+  {% include 'nav.html' %}
+  <!-- 左边导航栏 -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div>
+      <a class="navbar-brand" href="#">User Info Page</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <!-- 您可以在这里添加其他导航项目或样式 -->
+      </div>
+    </div>
+  </nav>
+  
+  <!-- 主体内容 -->
+  <div class="p-0 m-0">
+    <div class="row">
+      <!-- 左边栏菜单 -->
+      <nav id="sidebar" class="col-md-4 col-lg-3 d-md-block bg-light sidebar">
+        <div class="position-sticky">
+          <ul class="nav flex-column">
+            <li class="nav-item">
+              <a class="nav-link active" href="#menu1">
+                Menu 1
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#menu2">
+                Menu 2
+              </a>
+            </li>
+            <!-- 可根据需要添加更多菜单项 -->
+          </ul>
+        </div>
+      </nav>
+      <!-- 右边内容区域 -->
+      <main id="content" class="col-md-8 ms-sm-auto content">
+        <!-- 初始内容 -->
+        <div id="default" class="defaultContent container-fluid">
+          <h2>Initial Content</h2>
+          <p>This is the initial content that is displayed when the page loads.</p>
+        </div>
+        <!-- 各个菜单对应的内容 -->
+        <div id="menu1" class="container-fluid" style="display: none;">
+          <h2>Menu 1 Content</h2>
+          <p>This is the content for Menu 1.</p>
+        </div>
+        <div id="menu2" class="container-fluid" style="display: none;">
+          <h2>Menu 2 Content</h2>
+          <p>This is the content for Menu 2.</p>
+        </div>
+        <!-- 可根据需要添加更多内容区域 -->
+      </main>
+    </div>
+  </div>
+  <script>
+    // 显示指定内容区域，隐藏其他内容区域
+    function showContent(menuId) {
+      document.querySelectorAll('.container-fluid').forEach(function (content) {
+        content.style.display = 'none';
+      });
+      var targetContent = document.getElementById(menuId);
+      if (targetContent) {
+        targetContent.style.display = 'block';
+      }
+    }
+    
+    // 页面加载完成时执行
+    document.addEventListener("DOMContentLoaded", function () {
+      // 默认显示的内容
+      showContent('default');
+    });
+    
+    // 监听左边栏菜单点击事件
+    document.querySelectorAll('#sidebar .nav-link').forEach(function (link) {
+      link.addEventListener('click', function (e) {
+        e.preventDefault();
+        var targetMenu = this.getAttribute('href').substring(1);
+        if(targetMenu){
+          console.log('监听左边栏菜单点击事件:'+targetMenu);
+          showContent(targetMenu);
+        }
+      });
+    });
+  </script>
+  
+</body>
+</html>
