@@ -60,8 +60,9 @@ Please set your OpenAI's API keys first.
 
 ![效果图](https://github.com/jeckun/ChatGPT-bot-in-python/blob/main/static/img/2566-11-30-20.30.24.webp)
 
-```HTML
-<video width="720" height="303" controls> #或者：<video width:60% height:auto controls>
+```html
+<video autoplay loop>
 <source src="https://github.com/jeckun/ChatGPT-bot-in-python/blob/main/static/video/stream-chat-video.mp4" type="video/mp4">
+您的浏览器不支持HTML5视频标签。
 </video>
 ```
