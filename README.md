@@ -58,3 +58,4 @@ Please set your OpenAI's API keys first.
 ## Effect
 ![效果图](https://github.com/jeckun/ChatGPT-bot-in-python/blob/main/static/img/2566-11-30-20.29.55.webp)
 ![效果图](https://github.com/jeckun/ChatGPT-bot-in-python/blob/main/static/img/2566-11-30-20.30.24.webp)
+![效果图](https://github.com/jeckun/ChatGPT-bot-in-python/blob/main/static/video/stream-chat-video.mp4)
