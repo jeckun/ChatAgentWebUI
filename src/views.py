@@ -1,7 +1,5 @@
 import os
 
-# from flask import request, jsonify, render_template
-
 from fastapi.templating import Jinja2Templates
 from typing import AsyncGenerator
 
@@ -25,14 +23,6 @@ memory = Memory(system_message=SYSTEM_MESSAGE)
 chatgpt = ChatGPT(models, memory)
 
 # dalle = DALLE(models)
-
-# 处理用户点击菜单跳转不同页面
-
-# 使用Jinja2模板
-templates = Jinja2Templates(directory="templates")
-
-def index(request):
-    return templates.TemplateResponse("index.html", {"request": request})
 
 # def index():
 #   return render_template('index.html', active_menu='home')
@@ -62,20 +52,6 @@ async def chat_completion(message, websocket)-> AsyncGenerator[str, None]:
             yield state[i % 2]
     await chatgpt.memory.append(user_id, {'role': role, 'content': all_content})
 
-# 处理聊天界面用户交互
-# def send_message():
-#   try:
-#     user_input = request.form['user_input']
-#     user_id = request.remote_addr
-#     receive = chatgpt.get_response(user_id, user_input)
-#     return jsonify({'server_response': receive})
-#   except Exception as e:
-#     logger.error(f"Error processing message: {e}")
-#     return jsonify({
-#       'server_response':
-#       f'Oops! Something went wrong. \n\nerror message: {e}'
-#     })
-
 # def clear_chat():
 #   try:
 #     user_id = request.remote_addr
@@ -87,7 +63,6 @@ async def chat_completion(message, websocket)-> AsyncGenerator[str, None]:
 #       'server_response':
 #       f'Oops! Something went wrong. \n\nerror message: {e}'
 #     })
-
 
 # 处理保存用户输入的Key
 # def set_openai_key():

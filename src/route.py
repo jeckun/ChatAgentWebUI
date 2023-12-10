@@ -17,9 +17,6 @@ async def index(request: Request):
 
 @app.websocket("/ws")
 async def websocket_endpoint(websocket: WebSocket) -> NoReturn:
-    """
-    Websocket for AI responses
-    """
     await websocket.accept()
     while True:
         question = await websocket.receive_text()
