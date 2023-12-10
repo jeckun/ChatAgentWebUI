@@ -20,7 +20,7 @@
                 </div>
             </div>
             <div class="col-md-2 ">
-                <button class="btn btn-primary btn-block" id="user_input_but" onclick="sendMessage()"> Send </button>
+                <button class="btn btn-primary btn-block" id="user_input_but" onclick="sendUserMessage()"> Send </button>
             </div>
             <div class="col-md-2">
                 <button class="btn btn-danger btn-block" id="user_clear_but" onclick="clearChat()"> Clear </button>
@@ -65,7 +65,7 @@
       </div>
     </div>
   
-    <!-- 在<body>标签中添加以下代码 -->
+    <!-- Bootstrap jsp -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
             integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
             crossorigin="anonymous"></script>
@@ -76,207 +76,13 @@
             integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
             crossorigin="anonymous"></script>
   
-    <!-- 在消息对话框下方增加的 JavaScript 代码 -->
-    <script>
-      
-      // 从浏览器 localStorage 中获取 API Key
-      function getApiKey() {
-        var storedApiKey = localStorage.getItem('openai_api_key');
+    <!-- 使用 WebSocket 实现流式聊天消息返回 -->
+    <script src="/static/js/ws.js"></script>
 
-        if (storedApiKey) {
-          // 解析 API Key 对象
-          var apiKeyObject = JSON.parse(storedApiKey);
-          // 检查 API Key 是否过期
-          if (apiKeyObject.expiration > new Date().getTime()) {
-            // API Key 仍然有效，使用 apiKeyObject.key
-            return apiKeyObject.key;
-          } else {
-            // API Key 已过期，清除保存的内容
-            localStorage.removeItem('openai_api_key');
-            return ''
-          }
-        }
-      }
-      
-      $(document).ready(function () {
-        var setting = $('#settingItem');
+    <!-- 前端设置 API key. -->
+    <script src="/static/js/key.js"></script>
 
-        // 点击设置图标时触发事件
-        setting.click(function () {
-          // 从 localStorage 中获取 API Key
-          apiKey = getApiKey();
-          const apiKeyInput = document.getElementById('apiKeyInput');
-          apiKeyInput.text = apiKey;
-          apiKeyInput.value = apiKey;
-          apiKeyInput.type = 'password'
-          // 弹出模态框
-          $('#apiKeyModal').modal('show');
-        });
+    <!-- 前端处理用户聊天交互界面 -->
+    <script src="/static/js/chat.js"></script>
 
-        // 点击模态框中的保存按钮时触发事件
-        $('#saveApiKeyBtn').click(function () {
-          // 获取用户输入的 API Key
-          var apiKey = $('#apiKeyInput').val();
-          console.log("OpenAi API Key : "+apiKey)
-
-          // 设置 API Key 到 localStorage，并记录保存时间
-          var apiKeyObject = {
-            key: apiKey,
-            expiration: new Date().getTime() + 7 * 24 * 60 * 60 * 1000, // 设置有效期为7天
-          };
-
-          // 将 API Key 对象保存到 localStorage
-          localStorage.setItem('openai_api_key', JSON.stringify(apiKeyObject));
-
-          // 关闭模态框
-          $('#apiKeyModal').modal('hide');
-          
-          // 刷新当前页面
-          location.reload();
-        });
-      });
-
-      // 将 api key 发送到服务端用于聊天对话
-      function setOpenAiApiKey(api_key) {
-          var xhr = new XMLHttpRequest();
-          xhr.open('POST', '/set_key', true);
-          xhr.setRequestHeader('Content-Type', 'application/json');
-          xhr.onreadystatechange = function() {
-              if (xhr.readyState == 4 && xhr.status == 200) {
-                  var response = JSON.parse(xhr.responseText);
-                  console.log("response:"+response.server_response);
-                  statusBar.textContent = response.server_response;
-              }
-          };
-          // 将数据转换为 JSON 字符串
-          var data = JSON.stringify({ 'openai_api_key': api_key });
-          xhr.send(data);
-      }
-
-      function sleep(ms) {
-          return new Promise(resolve => setTimeout(resolve, ms));
-      }
-      
-      // 定义一个从浏览器获取 API Key异步函数
-      async function init() {
-          apiKey = getApiKey();
-          console.log(apiKey)
-          if (apiKey) {
-              setOpenAiApiKey(apiKey);
-
-              // 使用 await 需要在 async 函数内部
-              await sleep(2000);  // 暂停 2 秒
-
-              statusBar.textContent = 'Please enter your question.';
-          }
-      }
-
-      // 页面加载时调用异步函数
-      $(document).ready(function () {
-          init();
-      });
-
-    </script>
-
-    <script>
-        // 获取状态栏和消息对话框的引用
-        const statusBar = document.getElementById('status-bar');
-        function formartHtml(response) {
-          return response.replace(/\n\n/g, '<br><br>')
-        }
-        function addMessage(message, messageType) {
-            const messageBox = document.getElementById('chatHistory');
-            // 创建消息元素
-            const messageElement = document.createElement('div');
-            messageElement.className = messageType === 'user' ? 'user-message' : 'server-message';
-            // 创建头像容器
-            const avatarContainer = document.createElement('div');
-            avatarContainer.className = 'avatar-container';
-            // 创建头像
-            const avatar = document.createElement('img');
-            avatar.className = 'avatar';
-            // 设置头像的源
-            var discordlogourl = 'https://pub-ea398b99a11f43da9bf5018ccba88f05.r2.dev/discord-logo.webp';
-            var chatgptlogourl = 'https://pub-ea398b99a11f43da9bf5018ccba88f05.r2.dev/ChatGPT-logo.webp';
-            avatar.src = messageType === 'user' ? discordlogourl : chatgptlogourl;
-          
-            avatarContainer.appendChild(avatar);
-
-            // 创建消息内容容器
-            const messageContent = document.createElement('div');
-            messageContent.className = 'message-content';
-            messageHtml = formartHtml(message);
-            messageContent.innerHTML = messageHtml;
-
-            // 将头像容器和消息内容容器追加到消息元素
-            messageElement.appendChild(avatarContainer);
-            messageElement.appendChild(messageContent);
-
-            // 将消息元素追加到消息对话框
-            messageBox.appendChild(messageElement);
-
-            // 更新状态栏显示为“请等待...”
-            statusBar.textContent = 'Please wait ...';
-            statusBar.style.backgroundColor = 'lightgrey';
-        }
-
-        function sendMessage() {
-            var userQuestion = document.getElementById('user_input').value;
-
-            // 禁用输入框
-            document.getElementById('user_input').disabled = true;
-            document.getElementById('user_input_but').disabled = true;
-            document.getElementById('user_clear_but').disabled = true;
-
-            // 检查用户输入是否为空
-            if (!userQuestion.trim()) {
-                statusBar.textContent = 'User input is empty. Please enter a question.';
-                console.log("User input is empty. Please enter a question.");
-                return;
-            }
-          
-            addMessage(userQuestion ,'user');
-          
-            var xhr = new XMLHttpRequest();
-            xhr.open('POST', '/send_message', true);
-            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-            xhr.onreadystatechange = function() {
-                // 启用输入框
-                document.getElementById('user_input').disabled = false;
-                document.getElementById('user_input_but').disabled = false;
-                document.getElementById('user_clear_but').disabled = false;
-
-                if (xhr.readyState == 4 && xhr.status == 200) {
-                    var response = JSON.parse(xhr.responseText);
-                    addMessage(response.server_response, 'server');
-                    document.getElementById('user_input').value = '';
-                    statusBar.textContent = 'Complete.';
-                    console.log("response:"+response.server_response);
-                }
-            };
-            xhr.send('user_input=' + encodeURIComponent(userQuestion));
-        }
-
-        // Function to clear the chat history
-        function clearChat() {
-            var xhr = new XMLHttpRequest();
-            xhr.open('POST', '/clear_chat', true);
-            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState == 4 && xhr.status == 200) {
-                    document.getElementById('chatHistory').innerHTML = '';
-                    statusBar.textContent = 'Please enter your question.';
-                }
-            };
-            xhr.send();
-        }
-
-        // 切换密码框是否可见
-        function togglePasswordVisibility() {
-          var apiKeyInput = document.getElementById('apiKeyInput');
-          apiKeyInput.type = apiKeyInput.type === 'password' ? 'text' : 'password';
-          var showOpenAiApiKey = document.getElementById('basic-addon1');
-          showOpenAiApiKey.style.backgroundColor = showOpenAiApiKey.style.backgroundColor === 'white' ? '#e9ecef' : 'white';
-        }
-    </script>
 </body>
