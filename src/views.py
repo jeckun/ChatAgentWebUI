@@ -10,10 +10,10 @@ from src.chatgpt import ChatGPT, DALLE
 from src.models import OpenAIModel
 from src.memory import Memory
 
-OPENAI_API_KEY="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"
-ORGANIZATION_ID="org-ZbiWh6oHbybuxLZiipNt7axC"
+OPENAI_API_KEY="sk-"
+ORGANIZATION_ID="org-"
 OPENAI_MODEL_ENGINE="gpt-3.5-turbo"
-API_PROXY="https://chatgpt-api-proxy.cc"
+API_PROXY="https://you-proxy.cc"
 
 SYSTEM_MESSAGE="You are a helpful assistant."
 
