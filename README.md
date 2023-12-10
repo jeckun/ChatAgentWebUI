@@ -2,7 +2,7 @@
 
 ## 关于
 
-用Python+Flask写的ChatGPT聊天机器人，已经在Replit上部署，想要试试的可以直接使用。
+用 Python+FastAPI 写的 ChatGPT 聊天机器人，可以在 Replit 上部署，也支持 Docker 本地化部署。
 
 Demo： https://replit.com/@jeckun9527/ChatBot-in-Python?v=1
 
@@ -12,13 +12,38 @@ Demo： https://replit.com/@jeckun9527/ChatBot-in-Python?v=1
 
 API Key 获取地址： https://platform.openai.com/api-keys
 
-## 开发计划
+## 注册代理
 
-1、制作 Dorker 镜像，实现一键部署。   ——  完成
+想在国内使用，要么科学上网，要么使用代理。使用别人的代理不放心的话，可以自己搭建一个，具体方法如下。
 
-2、增加国内使用的 ChatGPT API Proxy，实现在国内用户快速部署与使用。  —— 完成
 
-3、实现流式输出，将服务端消息一个一个传回来，就像 ChatGPT 自己的聊天方式一样。由于Flask不支持异步传输，准备将Flask换成FastApi。
+[ChatGPTProxyAPI](https://github.com/x-dr/chatgptProxyAPI)
+
+
+## 实现功能
+
+1、使用最新 OpenAI 1.3.7 API接口，与旧版接口有些不同，已对部分聊天代码进行了迁移，后面继续完善其他的代码；
+
+
+
+2、可自行设置代理地址，实现在国内部署与使用；
+
+
+3、上下文保持，每次对话都会保留最近几次聊天内容回传 GPT，让他的回答更加准确；
+
+
+
+4、用 WebSocket + JavaScript 实现流式输出，可以像官方 ChatGPT 一样，分段返回答案。改善了用户体验；
+
+
+
+5、前端配置 key 和 代理；
+
+
+## 遇到的问题
+
+使用免费账号过于频繁情况，官方可能会直接删除你的Key，我调试接口时就遇到一次，不过没有封号，过一天再生成一个Key就可以了；
+
 
 ## 修改代理
 
@@ -68,4 +93,3 @@ Please set your OpenAI's API keys first.
 ![效果图](https://github.com/jeckun/ChatGPT-bot-in-python/blob/main/static/img/2566-11-30-20.30.24.webp)
 
 https://github.com/jeckun/ChatGPT-bot-in-python/assets/31623221/7b95574c-4b8e-4868-a99f-8693632440f4
-
