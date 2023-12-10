@@ -67,3 +67,5 @@ Please set your OpenAI's API keys first.
 
 ![效果图](https://github.com/jeckun/ChatGPT-bot-in-python/blob/main/static/img/2566-11-30-20.30.24.webp)
 
+https://github.com/jeckun/ChatGPT-bot-in-python/assets/31623221/7b95574c-4b8e-4868-a99f-8693632440f4
+
