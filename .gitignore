@@ -1,4 +1,6 @@
 /venv
 /.history
+/__pycache__
 .code-workspace
 .logs
+.vscode/launch.json

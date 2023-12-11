@@ -27,62 +27,18 @@
             </div>
         </div>
       </div>
-      <!-- 在消息对话框下方添加一个状态栏 -->
+      <!-- 状态栏 -->
       <div id="status-bar">Please enter your question.</div>
   </div>
   
-    <!-- 创建 OpenAI API Key 设置模态框 -->
-    <div class="modal" id="apiKeyModal" tabindex="-1" role="dialog">
-      <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <div class="modal-title-container">
-              <h5 class="modal-title">Enter Your OpenAI API Key</h5>
-            </div>
-            <div class="modal-close-container">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-          </div>
-          <div class="modal-body">
-            <div class="input-group">
-              <div class="input-group">
-                <input type="text" id="apiKeyInput" style="height: 100%;" placeholder="Enter your API Key..." class="form-control" aria-label="Input group example" aria-describedby="basic-addon1">
-                <span class="input-group-text" id="basic-addon1">
-                  <a class="nav-link"  href="#" style="display: flex; align-items: center;" id="showOpenAiApiKey">
-                    <img class="see" src="https://pub-ea398b99a11f43da9bf5018ccba88f05.r2.dev/eye.svg" onclick="togglePasswordVisibility()">
-                  </a>
-                </span>
-              </div>
-            </div>
-          </div>
-          <div class="modal-footer justify-content-center">
-            <button type="button" class="btn btn-primary" id="saveApiKeyBtn">Save</button>
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  
-    <!-- Bootstrap jsp -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-            crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-            crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-            crossorigin="anonymous"></script>
-  
-    <!-- 使用 WebSocket 实现流式聊天消息返回 -->
-    <script src="/static/js/ws.js"></script>
+  <!-- 使用 WebSocket 实现流式聊天消息返回 -->
+  <script src="/static/js/ws.js"></script>
 
-    <!-- 前端设置 API key. -->
-    <script src="/static/js/key.js"></script>
+  <!-- 前端处理用户聊天交互界面 -->
+  <script src="/static/js/chat.js"></script>
 
-    <!-- 前端处理用户聊天交互界面 -->
-    <script src="/static/js/chat.js"></script>
+  <!-- 前端设置 API key. -->
+  <script src="/static/js/key.js"></script>
 
+  {% include 'foot.html' %}
 </body>

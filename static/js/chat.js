@@ -111,11 +111,3 @@ function clearChat() {
     };
     xhr.send();
 }
-
-// 切换密码框是否可见
-function togglePasswordVisibility() {
-    var apiKeyInput = document.getElementById('apiKeyInput');
-    apiKeyInput.type = apiKeyInput.type === 'password' ? 'text' : 'password';
-    var showOpenAiApiKey = document.getElementById('basic-addon1');
-    showOpenAiApiKey.style.backgroundColor = showOpenAiApiKey.style.backgroundColor === 'white' ? '#e9ecef' : 'white';
-}
