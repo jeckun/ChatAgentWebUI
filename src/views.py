@@ -10,14 +10,14 @@ from src.models import OpenAIModel
 from src.memory import Memory
 
 OPENAI_API_KEY = os.environ['OPENAI_API_KEY'] 
-ORGANIZATION_ID = os.environ['ORGANIZATION_ID'] 
+# ORGANIZATION_ID = os.environ['ORGANIZATION_ID'] 
 OPENAI_MODEL_ENGINE = os.environ['OPENAI_MODEL_ENGINE']
 OPENAI_API_PROXY = os.environ.get('OPENAI_API_PROXY', None)
 OPENAI_API_PROXY = OPENAI_API_PROXY + "/v1/" if OPENAI_API_PROXY is not None else None
 
 models = OpenAIModel(api_key=OPENAI_API_KEY,
-                     organization_id=ORGANIZATION_ID,
                      model_engine=OPENAI_MODEL_ENGINE,
+                    #  organization_id=ORGANIZATION_ID,
                      base_url=OPENAI_API_PROXY)
 
 memory = Memory(system_message="You are a helpful assistant.")

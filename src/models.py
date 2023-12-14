@@ -17,8 +17,8 @@ class OpenAIModel(ModelInterface):
 
   def __init__(self,
                api_key: str,
-               organization_id: str,
                model_engine: str,
+               organization_id: str | None = None,
                base_url: str | None = None,
                image_size: str = '512x512'):
     self.client = AsyncOpenAI(api_key=api_key,
@@ -27,7 +27,7 @@ class OpenAIModel(ModelInterface):
     self.model_engine = model_engine
     self.image_size = image_size
 
-  # 将用户消息发送给 ChatGPT
+  # 与ChatGPT进行聊天，返回ChatGPT消息
   async def chat_completion(self, messages) -> AsyncStream:
     return await self.client.chat.completions.create(
         model=self.model_engine,
