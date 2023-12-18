@@ -1,5 +1,6 @@
 /venv
 /.history
+/backup
 /__pycache__
 .code-workspace
 .logs

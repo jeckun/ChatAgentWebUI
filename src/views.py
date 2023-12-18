@@ -39,25 +39,34 @@ def chat_about(request):
 
 # 处理聊天消息，流式返回ChatGPT消息
 async def chat_completion(message, websocket) -> AsyncGenerator[str, None]:
-  user_input = message
-  user_id = websocket.client.host
-  print("user message's", message)
-  response = await chatgpt.get_response(user_id, user_input)
-  role = ""
-  all_content = ""
-  state, i = ['$START.', '$END.'], 1
-  async for chunk in response:
-    role = chunk.choices[
-        0].delta.role if chunk.choices[0].delta.role != role and chunk.choices[
-            0].delta.role is not None else role
-    content = chunk.choices[0].delta.content
-    if content:
-      all_content += content
-      yield content
-    else:
-      i += 1
-      yield state[i % 2]
-  await chatgpt.memory.append(user_id, {'role': role, 'content': all_content})
+  try:
+    user_input = message
+    user_id = websocket.client.host
+    print("user message's", message)
+    response = await chatgpt.get_response(user_id, user_input)
+    role = ""
+    all_content = ""
+    state, i = ['$START.', '$END.'], 1
+    async for chunk in response:
+      role = chunk.choices[
+          0].delta.role if chunk.choices[0].delta.role != role and chunk.choices[
+              0].delta.role is not None else role
+      content = chunk.choices[0].delta.content
+      if content:
+        all_content += content
+        yield content
+      else:
+        i += 1
+        yield state[i % 2]
+    await chatgpt.memory.append(user_id, {'role': role, 'content': all_content})
+  except Exception as e:
+    await websocket.send_text(f"Error clearing chat history: {e}")
+    await JSONResponse(
+        status_code=500,
+        content={
+            'server_response':
+            f'Oops! Something went wrong. \n\nerror message: {e}'
+        })
 
 
 async def chat_clear(request):

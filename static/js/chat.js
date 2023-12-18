@@ -12,7 +12,7 @@ function sendUserMessage() {
 
     // 检查用户输入是否为空
     if (!message.trim()) {
-        statusBar.textContent = 'User input is empty. Please enter a question.';
+        // statusBar.textContent = 'User input is empty. Please enter a question.';
         console.log("User input is empty. Please enter a question.");
         return false;
     }
@@ -40,10 +40,10 @@ function addMessage(message, messageType) {
     if (['$START.', '$END.'].includes(message)) {
         // 控制状态栏和输入框状态
         if (message === '$START.'){
-            statusBar.textContent = 'Please wait ...';
+            // statusBar.textContent = 'Please wait ...';
             set_user_input(true)
         }else{
-            statusBar.textContent = 'Please enter a question.';
+            // statusBar.textContent = 'Please enter a question.';
             set_user_input(false)
         }
         statusBar.style.backgroundColor = 'lightgrey';
@@ -52,44 +52,127 @@ function addMessage(message, messageType) {
     }
 
     // 持续更新来自服务器的消息
-    if (window.globalMessageElement!==null && messageType==='server') {
-        messageHtml = formartHtml(message);
+    if (window.globalMessageElement !== null && messageType === 'server') {
         const childElements = window.globalMessageElement.getElementsByClassName('message-content');
-        childElements[0].innerHTML += messageHtml;
-        return ;
+        childElements[0].innerHTML += formartHtml(message);
+        return;
     }
 
-    // 创建新的服务器消息
+    // 创建新的消息元素
     const messageElement = document.createElement('div');
     messageElement.className = messageType === 'user' ? 'user-message' : 'server-message';
 
-    // 创建新的服务器消息头像
-    const avatarContainer = document.createElement('div');
-    avatarContainer.className = 'avatar-container';
-    // 设置服务器消息头像
+    // 创建头像和名称容器
+    const avatarNameContainer = document.createElement('div');
+    avatarNameContainer.className = 'avatar-name-container';
+
+    // 设置头像
     const avatar = document.createElement('img');
     avatar.className = 'avatar';
     var discordlogourl = 'https://pub-ea398b99a11f43da9bf5018ccba88f05.r2.dev/discord-logo.webp';
     var chatgptlogourl = 'https://pub-ea398b99a11f43da9bf5018ccba88f05.r2.dev/ChatGPT-logo.webp';
     avatar.src = messageType === 'user' ? discordlogourl : chatgptlogourl;
-    
-    avatarContainer.appendChild(avatar);
+    avatarNameContainer.appendChild(avatar);
 
-    // 创建新的服务器消息内容对象
+    // 创建名称元素
+    const nameElement = document.createElement('div');
+    nameElement.className = 'message-name';
+    nameElement.textContent = messageType === 'user' ? 'User' : 'ChatGPT';
+    avatarNameContainer.appendChild(nameElement);
+
+    // 创建消息内容容器
     const messageContent = document.createElement('div');
     messageContent.className = 'message-content';
-    messageHtml = formartHtml(message);
-    messageContent.innerHTML = messageHtml;
+    messageContent.innerHTML = formartHtml(message);
 
-    // 将头像容器和消息内容容器追加到消息元素
-    messageElement.appendChild(avatarContainer);
+    // 将头像和名称容器追加到消息元素
+    messageElement.appendChild(avatarNameContainer);
+
+    // 将消息内容容器追加到消息元素
     messageElement.appendChild(messageContent);
 
     // 将消息元素追加到消息对话框
     messageBox.appendChild(messageElement);
     window.globalMessageElement = messageType === 'user' ? null : messageElement;
-
 }
+
+// 在页面加载时动态设置消息栏的高度
+window.addEventListener('DOMContentLoaded', function() {
+    adjustMessageBoxHeight();
+  });
+
+  // 在窗口大小改变时重新调整消息栏的高度
+  window.addEventListener('resize', function() {
+    adjustHeight('chatHistory', 127);
+    adjustHeight('messagelist', 169); // 填入其他div的id和对应的高度
+  });
+
+  // 动态设置高度
+  function adjustHeight(elementId, offset) {
+    const element = document.getElementById(elementId);
+    const windowHeight = window.innerHeight;
+    const navbarHeight = document.querySelector('.navbar').offsetHeight;
+    const footerHeight = document.querySelector('.fixed-bottom').offsetHeight;
+    const newHeight = windowHeight - navbarHeight - footerHeight - offset;
+    element.style.height = `${newHeight}px`;
+  }
+
+// function addMessage(message, messageType) {
+//     const messageBox = document.getElementById('chatHistory');
+
+//     if (['$START.', '$END.'].includes(message)) {
+//         // 控制状态栏和输入框状态
+//         if (message === '$START.'){
+//             // statusBar.textContent = 'Please wait ...';
+//             set_user_input(true)
+//         }else{
+//             // statusBar.textContent = 'Please enter a question.';
+//             set_user_input(false)
+//         }
+//         statusBar.style.backgroundColor = 'lightgrey';
+//         console.log(message);
+//         return;
+//     }
+
+//     // 持续更新来自服务器的消息
+//     if (window.globalMessageElement!==null && messageType==='server') {
+//         messageHtml = formartHtml(message);
+//         const childElements = window.globalMessageElement.getElementsByClassName('message-content');
+//         childElements[0].innerHTML += messageHtml;
+//         return ;
+//     }
+
+//     // 创建新的服务器消息
+//     const messageElement = document.createElement('div');
+//     messageElement.className = messageType === 'user' ? 'user-message' : 'server-message';
+
+//     // 创建新的服务器消息头像
+//     const avatarContainer = document.createElement('div');
+//     avatarContainer.className = 'avatar-container';
+//     // 设置服务器消息头像
+//     const avatar = document.createElement('img');
+//     avatar.className = 'avatar';
+//     var discordlogourl = 'https://pub-ea398b99a11f43da9bf5018ccba88f05.r2.dev/discord-logo.webp';
+//     var chatgptlogourl = 'https://pub-ea398b99a11f43da9bf5018ccba88f05.r2.dev/ChatGPT-logo.webp';
+//     avatar.src = messageType === 'user' ? discordlogourl : chatgptlogourl;
+    
+//     avatarContainer.appendChild(avatar);
+
+//     // 创建新的服务器消息内容对象
+//     const messageContent = document.createElement('div');
+//     messageContent.className = 'message-content';
+//     messageHtml = formartHtml(message);
+//     messageContent.innerHTML = messageHtml;
+
+//     // 将头像容器和消息内容容器追加到消息元素
+//     messageElement.appendChild(avatarContainer);
+//     messageElement.appendChild(messageContent);
+
+//     // 将消息元素追加到消息对话框
+//     messageBox.appendChild(messageElement);
+//     window.globalMessageElement = messageType === 'user' ? null : messageElement;
+
+// }
 
 function set_user_input(status) {
     console.log('disabled user input state: ', status)
@@ -106,7 +189,7 @@ function clearChat() {
     xhr.onreadystatechange = function() {
         if (xhr.readyState == 4 && xhr.status == 200) {
             document.getElementById('chatHistory').innerHTML = '';
-            statusBar.textContent = 'Please enter your question.';
+            // statusBar.textContent = 'Please enter your question.';
         }
     };
     xhr.send();

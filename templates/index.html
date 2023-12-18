@@ -1,36 +1,238 @@
-{% include 'head.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbox</title>
+    <link rel="icon" href="static/img/favicon.svg">
+    
+    <link href="static/css/bootstrap.min.css" rel="stylesheet"/>
+    <script src="static/js/bootstrap.bundle.js" crossorigin="anonymous"></script>
+
+    <link href="static/css/style.css" rel="stylesheet">
+</head>
 <body>
-  {% include 'nav.html' %}
-    <div class="container mt-3">
-      <div style="text-align: center"><p>OpenAI Model Engine: gpt-3.5-turbo</p></div>
-      <div class="row mt-3">
-          <!-- 消息框 -->
-          <div class="col-md-12">
-              <div class="card">
-                  <div class="card-body" id="chatHistory" style="overflow-y: auto;">
-                      <!-- Chat history will be displayed here -->
-                  </div>
-              </div>
-          </div>
-        <!-- 输入框 -->
-        <div class="row col-md-12 mt-3 pr-0">
-            <div class="col-md-8">
-                <div class="form-group">
-                    <input type="text" class="form-control" id="user_input" placeholder="Type your message...">
+  <div class="chat">
+    <!-- 导航栏 -->
+    {% include 'nav.html' %}
+    <div class="row vh-100 vw-100 mx-0 px-0">
+      <!-- 主要内容 -->
+      <div class="main-body row align-items-start mx-0 px-0 " style="margin-top: 10px;">
+        <!-- 左边栏 -->
+        <div class="col-3 px-0 ">
+          <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="nav-chat" role="tabpanel" aria-labelledby="nav-chat-tab" tabindex="0">
+              <!-- chat-list -->
+              <div class="chat-list">
+                <!-- 新的对话 -->
+                <div class="new-chat card chat-new-bg m-1 px-3 py-2 border border-secondary text-center">
+                  <a href="#" >
+                      <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="1.2em" width="1.2em" xmlns="http://www.w3.org/2000/svg"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                      &nbsp New Chat
+                  </a>
                 </div>
+                <!-- 消息列表 -->
+                <div class="message-list px-1 " id="messagelist" style="height: calc(100vh - 169px); overflow-y: scroll; -ms-overflow-style: none; scrollbar-width: none;">
+                  <div class="list-group">
+                    <!-- 最近对话 -->
+                    <button type="button" class="list-group-item list-group-item-action px-1">
+                        <div class="row mx-1">
+                          <div class="col-9 px-0 test-left">
+                              <a href="#">
+                                  Chat 1
+                              </a>
+                          </div>
+                          <div class="col-3 px-0 text-end">
+                              <a href="#">
+                                  <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+                              </a>
+                              <a href="#">
+                                  <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+                              </a>
+                          </div>
+                        </div>
+                    </button>
+                    <!-- 其他对话 -->
+                    <button type="button" class="list-group-item list-group-item-action px-1">
+                      <div class="row mx-1">
+                        <div class="col-9 px-0 test-left">
+                            <a href="#">
+                                Chat 1
+                            </a>
+                        </div>
+                        <div class="col-3 px-0 text-end">
+                            <a href="#">
+                                <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+                            </a>
+                            <a href="#">
+                                <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+                            </a>
+                        </div>
+                      </div>
+                    </button>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="col-md-2 ">
-                <button class="btn btn-primary btn-block" id="user_input_but" onclick="sendUserMessage()"> Send </button>
+            <div class="tab-pane fade" id="nav-prompt" role="tabpanel" aria-labelledby="nav-prompt-tab" tabindex="0">
+              <!-- Prompt-list -->
+              <div class="prompt-list">
+                <!-- 新的Prompt -->
+                <div class="new-chat card chat-new-bg m-1 px-3 py-2 border border-secondary text-center">
+                  <a href="#" >
+                      <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="1.2em" width="1.2em" xmlns="http://www.w3.org/2000/svg"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                      &nbsp New Prompt
+                  </a>
+                </div>
+                <!-- Prompt列表 -->
+                <div class="message-list px-1 " id="messagelist" style="height: calc(100vh - 169px); overflow-y: scroll; -ms-overflow-style: none; scrollbar-width: none;">
+                  <div class="list-group">
+                    <!-- 最近Prompt -->
+                    <button type="button" class="list-group-item list-group-item-action px-1">
+                        <div class="row mx-1">
+                          <div class="col-9 px-0 test-left">
+                              <a href="#">
+                                Prompt 1
+                              </a>
+                          </div>
+                          <div class="col-3 px-0 text-end">
+                              <a href="#">
+                                  <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+                              </a>
+                              <a href="#">
+                                  <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+                              </a>
+                          </div>
+                        </div>
+                    </button>
+                    <!-- 其他Prompt -->
+                    <button type="button" class="list-group-item list-group-item-action px-1">
+                      <div class="row mx-1">
+                        <div class="col-9 px-0 test-left">
+                            <a href="#">
+                              Prompt 1
+                            </a>
+                        </div>
+                        <div class="col-3 px-0 text-end">
+                            <a href="#">
+                                <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+                            </a>
+                            <a href="#">
+                                <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+                            </a>
+                        </div>
+                      </div>
+                    </button>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="col-md-2">
-                <button class="btn btn-danger btn-block" id="user_clear_but" onclick="clearChat()"> Clear </button>
+          </div>
+        </div>
+        <!-- 右边主体 -->
+        <div class="col px-0">
+          <!-- 消息栏 -->
+          <div class="message">
+            <div class="message-box card m-1 p-3" id="chatHistory" style="height: calc(100vh - 127px); overflow-y: auto;">
+              <!-- Chat history will be displayed here -->
             </div>
+          </div>
         </div>
       </div>
-      <!-- 状态栏 -->
-      <div id="status-bar">Please enter your question.</div>
+      <!-- 底部设置及输入 -->
+      <div class="shadow row align-items-end mx-0 px-0 fixed-bottom" style="height: 55px;">
+        <!-- 设置区域 -->
+        <div class="col-3 px-1 py-1">
+          <nav class="my-1">
+            <div class="nav nav-pills" id="nav-tab" role="tablist">
+              <button class="nav-link active" id="nav-chat-tab" data-bs-toggle="tab" data-bs-target="#nav-chat" type="button" role="tab" aria-controls="nav-chat" aria-selected="true">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-chat" viewBox="0 0 18 18">
+                  <path d="M2.678 11.894a1 1 0 0 1 .287.801 10.97 10.97 0 0 1-.398 2c1.395-.323 2.247-.697 2.634-.893a1 1 0 0 1 .71-.074A8.06 8.06 0 0 0 8 14c3.996 0 7-2.807 7-6 0-3.192-3.004-6-7-6S1 4.808 1 8c0 1.468.617 2.83 1.678 3.894m-.493 3.905a21.682 21.682 0 0 1-.713.129c-.2.032-.352-.176-.273-.362a9.68 9.68 0 0 0 .244-.637l.003-.01c.248-.72.45-1.548.524-2.319C.743 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7-3.582 7-8 7a9.06 9.06 0 0 1-2.347-.306c-.52.263-1.639.742-3.468 1.105z"/>
+                </svg>&nbsp Chat
+              </button>
+              <button class="nav-link" id="nav-prompt-tab" data-bs-toggle="tab" data-bs-target="#nav-prompt" type="button" role="tab" aria-controls="nav-prompt" aria-selected="false">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bookmark" viewBox="0 0 16 16">
+                  <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1z"/>
+                </svg>&nbsp Prompt
+              </button>
+              <button class="nav-link" id="nav-exit-but" data-bs-toggle="tab" data-bs-target="#exit" type="button" role="tab" aria-controls="nav-exit" aria-selected="false">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-escape" viewBox="0 0 16 16">
+                  <path d="M8.538 1.02a.5.5 0 1 0-.076.998 6 6 0 1 1-6.445 6.444.5.5 0 0 0-.997.076A7 7 0 1 0 8.538 1.02Z"/>
+                  <path d="M7.096 7.828a.5.5 0 0 0 .707-.707L2.707 2.025h2.768a.5.5 0 1 0 0-1H1.5a.5.5 0 0 0-.5.5V5.5a.5.5 0 0 0 1 0V2.732z"/>
+                </svg>&nbsp Exit
+              </button>
+            </div>
+          </nav>
+        </div>
+        <!-- 用户输入 -->
+        <div class="col px-1 align-items-center">
+          <form class="mx-0 px-0 py-2 d-flex ">
+            <div class="flex-grow-1">
+              <textarea class="form-control" placeholder="Please enter your question." id="user_input" aria-label="Please enter your question." rows="1"></textarea>
+            </div>
+            <div class="ms-2">
+              <button type="submit" class="btn btn-primary" id="user_input_but" onclick="sendUserMessage()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-send-fill" viewBox="0 0 16 16">
+                  <path d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855H.766l-.452.18a.5.5 0 0 0-.082.887l.41.26.001.002 4.995 3.178 3.178 4.995.002.002.26.41a.5.5 0 0 0 .886-.083l6-15Zm-1.833 1.89L6.637 10.07l-.215-.338a.5.5 0 0 0-.154-.154l-.338-.215 7.494-7.494 1.178-.471-.47 1.178Z"/>
+                </svg>
+              </button>
+              <button type="submit" class="btn btn-secondary" id="user_clear_but" onclick="clearChat()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+                  <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5"/>
+                </svg>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
   </div>
-  
+
+  <!-- 创建 OpenAI API Key 设置模态框 -->
+  <div class="modal" id="apiKeyModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div class="modal-title-container">
+            <h5 class="modal-title">Enter Your OpenAI API Key</h5>
+          </div>
+          <div class="modal-close-container">
+            <button type="button" class="close" id="closeBtn" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        </div>
+        <div class="modal-body">
+          <div class="input-group">          
+            <div class="input-group">
+              <input type="text" id="apiproxyInput" style="height: 100%;" placeholder="Enter your ChatGPT Proxy Url..." class="form-control" aria-label="Input group example" aria-describedby="basic-addon1"> 
+              <span class="input-group-text" id="basic-addon1">
+                <a class="nav-link"  href="#" style="display: flex; align-items: center;" id="showOpenAiApiProxy">
+                  <img class="see" src="https://pub-ea398b99a11f43da9bf5018ccba88f05.r2.dev/eye.svg" onclick="toggleProxyInputVisibility()">
+                </a>
+              </span> 
+            </div>
+            <div class="input-group">
+              <input type="text" id="apiKeyInput" style="height: 100%;" placeholder="Enter your API Key..." class="form-control" aria-label="Input group example" aria-describedby="basic-addon2">
+              <span class="input-group-text" id="basic-addon2">
+                <a class="nav-link"  href="#" style="display: flex; align-items: center;" id="showOpenAiApiKey">
+                  <img class="see" src="https://pub-ea398b99a11f43da9bf5018ccba88f05.r2.dev/eye.svg" onclick="toggleKeyInputVisibility()">
+                </a>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer justify-content-center">
+          <button type="button" class="btn btn-primary" id="saveApiKeyBtn">Save</button>
+          <button type="button" class="btn btn-secondary" id="cancelBtn" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- End -->
+  <script src="static/js/script.js"></script>
+
   <!-- 使用 WebSocket 实现流式聊天消息返回 -->
   <script src="/static/js/ws.js"></script>
 
@@ -39,6 +241,5 @@
 
   <!-- 前端设置 API key. -->
   <script src="/static/js/key.js"></script>
-
-  {% include 'foot.html' %}
 </body>
+</html>

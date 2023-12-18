@@ -1,76 +1,27 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="/" style="display: flex; align-items: center;">
-    <img src="https://pub-ea398b99a11f43da9bf5018ccba88f05.r2.dev/favicon.svg" alt="Logo" height="30" style="margin-right: 5px;">ChatGPT Bot in Python
-  </a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <!-- 菜单 -->
-  <div class="collapse navbar-collapse justify-content-end" id="navbarScroll">
-    <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
-      <li class="{% if active_menu == 'home' %} nav-item active font-weight-bold {% endif %} nav-item">
-        <a class="nav-link" href="/">Home</a>
-      </li>
-      <li class="{% if active_menu == 'about' %} nav-item active font-weight-bold {% endif %} nav-item">
-        <a class="nav-link" href="/about">About</a>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="display: flex; align-items: center;">
-          <img class="Avatar" src="https://pub-ea398b99a11f43da9bf5018ccba88f05.r2.dev/discord-logo.webp" alt="头像" height="25px" style="border-radius: 50%">
+<nav class="shadow navbar bg-body-tertiary p-0" style="height: 55px;">
+    <div class="container-fluid" >
+        <a class="navbar-brand">
+            <img src="https://pub-ea398b99a11f43da9bf5018ccba88f05.r2.dev/favicon.svg" alt="Logo" height="30" style="margin-right: 5px;">
+            ChatBox
         </a>
-        <ul class="dropdown-menu">          
-          <li>
-            <a class="dropdown-item" href="#" style="display: flex; align-items: center;" id="settingItem">
-              <img class="setting" src="https://pub-ea398b99a11f43da9bf5018ccba88f05.r2.dev/settings.svg" style="height:25px; width:25px;">
-              <span class="ml-1">Setting</span>
-            </a>
-          </li>
-        </ul>
-      </li>
-    </ul>
-  </div>
-</nav>
-
-<!-- 创建 OpenAI API Key 设置模态框 -->
-<div class="modal" id="apiKeyModal" tabindex="-1" role="dialog">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <div class="modal-title-container">
-          <h5 class="modal-title">Enter Your OpenAI API Key</h5>
-        </div>
-        <div class="modal-close-container">
-          <button type="button" class="close" id="closeBtn" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-      </div>
-      <div class="modal-body">
-        <div class="input-group">          
-          <div class="input-group">
-            <input type="text" id="apiproxyInput" style="height: 100%;" placeholder="Enter your ChatGPT Proxy Url..." class="form-control" aria-label="Input group example" aria-describedby="basic-addon1"> 
-            <span class="input-group-text" id="basic-addon1">
-              <a class="nav-link"  href="#" style="display: flex; align-items: center;" id="showOpenAiApiProxy">
-                <img class="see" src="https://pub-ea398b99a11f43da9bf5018ccba88f05.r2.dev/eye.svg" onclick="toggleProxyInputVisibility()">
-              </a>
-            </span> 
-          </div>
-          <div class="input-group">
-            <input type="text" id="apiKeyInput" style="height: 100%;" placeholder="Enter your API Key..." class="form-control" aria-label="Input group example" aria-describedby="basic-addon2">
-            <span class="input-group-text" id="basic-addon2">
-              <a class="nav-link"  href="#" style="display: flex; align-items: center;" id="showOpenAiApiKey">
-                <img class="see" src="https://pub-ea398b99a11f43da9bf5018ccba88f05.r2.dev/eye.svg" onclick="toggleKeyInputVisibility()">
-              </a>
-            </span>
-          </div>
-        </div>
-      </div>
-      <div class="modal-footer justify-content-center">
-        <button type="button" class="btn btn-primary" id="saveApiKeyBtn">Save</button>
-        <button type="button" class="btn btn-secondary" id="cancelBtn" data-dismiss="modal">Close</button>
+      <div class="d-flex" role="search">
+        <ul class="nav justify-content-end">
+            <li class="nav-item">
+              <a class="nav-link " aria-current="page" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link " aria-current="page" id="settingItem" href="#">Setting</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle " data-bs-toggle="dropdown" href="#">Model</a>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li><a class="dropdown-item" href="#">gpt-3.5-turbo</a></li>
+                <li><a class="dropdown-item" href="#">gpt-3.5-turbo-16k</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="#">gpt-4.0</a></li>
+              </ul>
+            </li>
+          </ul>
       </div>
     </div>
-  </div>
-</div>
+</nav>

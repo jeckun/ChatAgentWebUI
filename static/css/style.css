@@ -1,0 +1,59 @@
+
+a {
+    text-decoration: none;
+    color: hsl(0, 2%, 8%);
+  }
+  a:visited {
+    text-decoration: none;
+    text-emphasis-color: #ccc8c8;
+  }
+  a:hover {
+    text-decoration:none;
+    color: #8768eee3;
+  }
+
+  .navbar .nav-link {
+    color: black !important;
+  }
+
+.user-message {
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  background-color: white;
+}
+
+.server-message {
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  background-color: #f8f9fa;
+}
+
+.avatar {
+  /* width: 100%;  /* 使头像撑满容器 */ */
+  height: 30px;
+  background-size: cover;  /* 确保背景图像完全覆盖容器 */
+  background-position: center;  /* 将背景图像居中 */
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.avatar-container {
+  width: 35px;  /* 十二分之一宽度 */
+  height: 40px;：
+  text-align: center;  /* 居中头像 */
+  display: flex;
+  align-items; center;
+  margin-right: 15px;
+}
+
+.message-content {
+  width: auto;  /* 其余部分的宽度，以确保总宽度为100% */
+  display: inline-block;  /* 将消息内容和头像放在同一行 */
+  vertical-align: top;    /* 顶部对齐，确保头像和消息内容的顶部对齐 */
+}
