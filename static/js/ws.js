@@ -52,6 +52,7 @@ connectWebSocket();
 function sendMessage(message) {
     // 检查 WebSocket 的 readyState，如果为 OPEN，则发送消息
     if (ws.readyState === WebSocket.OPEN) {
+        console.log("send message:", message)
         ws.send(message);
     } else {
         console.warn('WebSocket连接未打开，无法发送消息。');
