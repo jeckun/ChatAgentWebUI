@@ -3,7 +3,7 @@ from fastapi import FastAPI, Request, WebSocket
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
-from src.views import chat_index, chat_completion, chat_clear, chat_about, chat_set_key
+from src.views import chat_index, chat_completion, chat_clear, chat_set_key
 
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
@@ -16,12 +16,6 @@ templates = Jinja2Templates(directory="templates")
 @app.get("/")
 async def index(request: Request):
   return chat_index(request)
-
-
-@app.get("/about")
-async def about(request: Request):
-  return chat_about(request)
-
 
 @app.websocket("/ws")
 async def websocket_endpoint(websocket: WebSocket) -> NoReturn:

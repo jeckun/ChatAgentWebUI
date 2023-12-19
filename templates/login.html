@@ -1,0 +1,30 @@
+<div class="container mt-1">
+    <div class="card mx-auto" style="max-width: 400px;">
+        <div class="card-header">
+            Welcome to back!
+        </div>
+        <div class="card-body">
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="inputUsername">Username</label>
+                    <input type="text" class="form-control" id="inputUsername" placeholder="">
+                </div>
+                <div class="form-group">
+                    <label for="inputEmail">Email</label>
+                    <input type="email" class="form-control" id="inputEmail" placeholder="">
+                </div>
+                <div class="form-group">
+                    <label for="inputPassword">Password</label>
+                    <input type="password" class="form-control" id="inputPassword" placeholder="">
+                    <span class="form-text" id="passwordHelpInline">
+                        Your password must be 6-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.
+                    </span>
+                </div>
+                <div class="text-center my-1">
+                    <button type="button" class="btn btn-primary btn-block" onclick="signIn()">Sign in</button>
+                    <button type="button" class="btn btn-secondary btn-block" onclick="signUp()">Sign up</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

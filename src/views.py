@@ -29,12 +29,9 @@ chatgpt = ChatGPT(models, memory)
 templates = Jinja2Templates(directory="templates")
 
 
+# 加载聊天首页
 def chat_index(request):
   return templates.TemplateResponse("index.html", {"request": request})
-
-
-def chat_about(request):
-  return templates.TemplateResponse("about.html", {"request": request})
 
 
 # 处理聊天消息，流式返回ChatGPT消息
