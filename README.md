@@ -53,6 +53,8 @@ PROXY="【换成你自己的代理服务器网址】/v1/"
 
 2023-12-10 实现流式对话，用户能够更快的看到 ChatGPT 回复消息，提升了用户体验。为了实现这个流式对话，替换了不能异步通信的Flask，改为使用FastAPI。
 
+2023-12-19 更新界面，同时修复ws连接错误。
+
 ## About
 
 This is a chatbot that uses OpenAI's GPT-3 language model to generate responses.
@@ -76,10 +78,9 @@ Please set your OpenAI's API keys first.
 
 2023-12-10 implemented streaming conversations to allow users to see ChatGPT reply messages more quickly, enhancing the user experience. To achieve this streaming dialogue, Flask, which does not support asynchronous communication, was replaced with FastAPI.
 
+2023-12-19 Update the WebUI and fix the ws connection error.
+
 ## Effect
 
-![效果图](https://github.com/jeckun/ChatGPT-bot-in-python/blob/main/static/img/2566-11-30-20.29.55.webp)
-
-![效果图](https://github.com/jeckun/ChatGPT-bot-in-python/blob/main/static/img/2566-11-30-20.30.24.webp)
 
 https://github.com/jeckun/ChatGPT-bot-in-python/assets/31623221/7b95574c-4b8e-4868-a99f-8693632440f4
