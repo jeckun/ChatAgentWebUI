@@ -1,0 +1,37 @@
+<div class="container mt-1" id="user_inf">
+    <div class="card mx-auto" style="max-width: 400px;">
+        <div class="text-center">
+            <img class="avatar-lag rounded-circle mt-1" style="height: 50%; width: 50%;" src="https://pub-ea398b99a11f43da9bf5018ccba88f05.r2.dev/discord-logo.webp">
+        </div>
+        <div class="card-body">
+            <form id="userInfoForm" class="form-inline">
+                <div class="mb-3 row text-center">
+                    <H1 class="col-form-label">John</H1>
+                    <span class="form-text">John@example.com</span>
+                </div>
+                <div class="mb-3 row">
+                    <label for="viewCurrentKey" class="col-sm-4 col-form-label">OpenAI Key</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="viewCurrentKey" readonly>
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="viewProxyUrl" class="col-sm-4 col-form-label">Proxy Url</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="viewProxyUrl" readonly>
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="viewDefaultModel" class="col-sm-4 col-form-label">Def Model</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="viewDefaultModel" readonly>
+                    </div>
+                </div>
+                
+                <div class="text-center my-1">
+                    <button type="button" class="btn btn-secondary btn-block" onclick="edit()">Edit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

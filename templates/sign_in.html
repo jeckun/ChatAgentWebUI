@@ -1,0 +1,40 @@
+<div class="container mt-1" id="sign_in">
+    <div class="card mx-auto" style="max-width: 400px;">
+        <div class="card-header">
+            Welcome to back!
+        </div>
+        <div class="card-body">
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="inputUsername">Username</label>
+                    <input type="text" class="form-control" id="inputUsername" placeholder="">
+                </div>
+                <div class="form-group">
+                    <label for="inputEmail">Email</label>
+                    <div class="input-group mb-3">
+                        <input type="email" class="form-control" id="inputEmail" placeholder="">
+                        <span class="input-group-text" id="basic-addon1">@</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputPassword">Password</label>
+                    <div class="input-group mb-3">
+                        <input type="password" class="form-control" id="inputPassword" placeholder="">
+                        <a class="input-group-text" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                            <span>R</span>
+                        </a>
+                    </div>
+                      <div class="collapse" id="collapseExample">
+                        <div class="card card-body">
+                            Your password must be 6-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.
+                        </div>
+                      </div>
+                </div>
+                <div class="text-center my-1">
+                    <button type="button" class="btn btn-primary btn-block" onclick="signIn()">Sign in</button>
+                    <button type="button" class="btn btn-secondary btn-block" onclick="signUp()">Sign up</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
