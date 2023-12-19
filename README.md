@@ -82,5 +82,6 @@ Please set your OpenAI's API keys first.
 
 ## Effect
 
+![效果图](https://github.com/jeckun/ChatShare/blob/ChatShare-0-0-005/doc/2023-12-19_12.51.28.webp)
 
 https://github.com/jeckun/ChatGPT-bot-in-python/assets/31623221/7b95574c-4b8e-4868-a99f-8693632440f4
