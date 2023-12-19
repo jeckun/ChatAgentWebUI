@@ -45,9 +45,11 @@ a {
 
 .avatar-container {
   width: 35px; 
-  height: 40px;：
+  height: 40px;
   text-align: center; 
   display: flex;
+  align-items: flex-start; /* 设置垂直对齐方式为顶部 */
+  align-self: flex-start; /* 设置头像在 flex 容器的顶部对齐 */
   margin-right: 15px;
 }
 
