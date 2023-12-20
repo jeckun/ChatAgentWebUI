@@ -58,10 +58,7 @@ class User:
         self.default_model = "gpt-3.5-turbo"
         self.avatar_link = None
 
-    # def __str__(self) -> str:
-    #     self.name
-    
-    def __dict__(self) -> dict:
+    def to_dict(self) -> dict:
         """
         Convert User instance to a dictionary.
         """
@@ -82,11 +79,7 @@ class User:
         return user_dict
 
     def __str__(self):
-        """
-        Convert User instance to a JSON string.
-        """
-        user_dict = self.__dict__()
-        return json.dumps(user_dict, indent=2)
+        return self.name
     
     def validate(self):
         # 验证数据
@@ -151,12 +144,12 @@ class User:
         return user
 
     @staticmethod
-    def login(name: str | None = None, password: str | None = None, email: str | None = None, registration_ip: str | None = None):
-        if not (name or email) or not password:
+    def login(name: str | None = None, password: str | None = None, registration_ip: str | None = None):
+        if not name or not password:
             raise ValueError("用户名/邮箱和密码是必填项")
 
-        query = "SELECT * FROM user WHERE name = ? OR email = ? AND password = ?"
-        cursor.execute(query, (name, email, password))
+        query = "SELECT * FROM user WHERE (name = ? or email = ?) AND password = ?"
+        cursor.execute(query, (name, name, password))
         user_data = cursor.fetchone()
 
         if user_data:
@@ -175,7 +168,7 @@ class User:
             user.default_model = user_data[11]
             return user
         else:
-            raise ValueError("验证失败，用户名或者密码错误！")
+            raise ValueError("验证失败，用户名/邮箱或者密码错误！")
 
     @staticmethod
     def query(username=None, email=None):

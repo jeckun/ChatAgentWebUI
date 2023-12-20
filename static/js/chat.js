@@ -32,7 +32,6 @@ function formartHtml(response) {
     return response.replace(/\n/g, '<br>')
 }
 
-
 // 在页面加载时动态设置消息栏的高度
 window.addEventListener('DOMContentLoaded', function() {
     adjustMessageBoxHeight();

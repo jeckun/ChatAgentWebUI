@@ -1,20 +1,24 @@
 
 a {
-    text-decoration: none;
-    color: hsl(0, 2%, 8%);
-  }
-  a:visited {
-    text-decoration: none;
-    text-emphasis-color: #ccc8c8;
-  }
-  a:hover {
-    text-decoration:none;
-    color: #8768eee3;
-  }
+  text-decoration: none;
+  color: hsl(0, 2%, 8%);
+}
+a:visited {
+  text-decoration: none;
+  text-emphasis-color: #ccc8c8;
+}
+a:hover {
+  text-decoration:none;
+  color: #8768eee3;
+}
 
-  .navbar .nav-link {
-    color: black !important;
-  }
+.navbar .nav-link {
+  color: black !important;
+}
+
+.hidden {
+  display: none;
+}
 
 .user-message {
   padding: 10px;

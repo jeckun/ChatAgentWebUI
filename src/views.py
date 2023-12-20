@@ -66,13 +66,9 @@ async def chat_completion(message, websocket) -> AsyncGenerator[str, None]:
             f'Oops! Something went wrong. \n\nerror message: {e}'
         })
 
-async def signin(name, password, email, ip_address: str | None = None):
+async def signin(name, password, ip_address: str | None = None):
   # 登录
-  try:
-    user = User.login(name,password,email,ip_address)
-    return {"user": user}
-  except Exception as e:
-    return {"error": e}
+  return User.login(name, password, ip_address)
 
 async def signup(name, password, email, ip_address: str | None = None):
   # 注册
@@ -80,7 +76,7 @@ async def signup(name, password, email, ip_address: str | None = None):
     user = User.register(name,password,email,ip_address)
     return {"user": user}
   except Exception as e:
-    return {"error": e}
+    return {"error": e, "user": None}
 
 async def chat_clear(request):
   try:

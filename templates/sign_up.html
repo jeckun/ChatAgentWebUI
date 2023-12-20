@@ -4,15 +4,22 @@
             Welcome to back!
         </div>
         <div class="card-body">
-            <form id="loginForm">
+            <form id="registerForm">
                 <div class="form-group">
-                    <label for="inputUsername">User Name / Email</label>
-                    <input type="text" class="form-control" id="inputUsername" placeholder="">
+                    <label for="inputUsername">Username</label>
+                    <input type="text" class="form-control" id="registerUsername" placeholder="">
+                </div>
+                <div class="form-group">
+                    <label for="inputEmail">Email</label>
+                    <div class="input-group mb-3">
+                        <input type="email" class="form-control" id="registerEmail" placeholder="">
+                        <span class="input-group-text" id="basic-addon1">@</span>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="inputPassword">Password</label>
                     <div class="input-group mb-3">
-                        <input type="password" class="form-control" id="inputPassword" placeholder="">
+                        <input type="password" class="form-control" id="registerPassword" placeholder="">
                         <a class="input-group-text" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
                             <span>R</span>
                         </a>
@@ -24,8 +31,8 @@
                       </div>
                 </div>
                 <div class="text-center my-1">
-                    <button type="submit" class="btn btn-primary btn-block" ">Sign in</button>
-                    <button type="button" class="btn btn-secondary btn-block" onclick="signUp()">Sign up</button>
+                    <button type="button" class="btn btn-secondary btn-block" onclick="signin()"">Sign in</button>
+                    <button type="submit" class="btn btn-primary btn-block" >Sign up</button>
                 </div>
                 <div><p id="message"></p></div>
             </form>

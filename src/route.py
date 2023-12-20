@@ -1,3 +1,4 @@
+import json
 from typing import NoReturn
 from fastapi import FastAPI, Request, WebSocket, HTTPException, Form
 from fastapi.staticfiles import StaticFiles
@@ -41,14 +42,13 @@ async def register(request: Request, username: str = Form(...), email: str = For
     return {"message": "User registered successfully", "user": str(valimsg['user'])}
 
 @app.post("/signin")
-async def login(request: Request, username: str = Form(...), email: str = Form(...), password: str = Form(...)):
-    # 登录
-    client_ip = get_client_ip(request)
-    print("login", username)
-    valimsg = signin(name=username, email=email, password=password, ip_address=client_ip)
-    if valimsg:
-        raise HTTPException(status_code=400, detail="Username already registered")
-    return {"message": "User logined successfully", "user": str(valimsg['user'])}
+async def login(request: Request, username: str = Form(...), password: str = Form(...)):
+    try:
+      client_ip = request.client.host
+      user = await signin(name=username, password=password, ip_address=client_ip)
+      return {"user": user.to_dict()}
+    except Exception as e:
+      raise HTTPException(status_code=401, detail=f"{e}")
 
 @app.post("/clear_chat")
 async def clear_chat(request: Request):
