@@ -8,6 +8,7 @@ from src.logger import logger
 from src.chatgpt import ChatGPT, DALLE
 from src.models import OpenAIModel
 from src.memory import Memory
+from src.user import User
 
 OPENAI_API_KEY = os.environ['OPENAI_API_KEY'] 
 # ORGANIZATION_ID = os.environ['ORGANIZATION_ID'] 
@@ -65,6 +66,21 @@ async def chat_completion(message, websocket) -> AsyncGenerator[str, None]:
             f'Oops! Something went wrong. \n\nerror message: {e}'
         })
 
+async def signin(name, password, email, ip_address: str | None = None):
+  # 登录
+  try:
+    user = User.login(name,password,email,ip_address)
+    return {"user": user}
+  except Exception as e:
+    return {"error": e}
+
+async def signup(name, password, email, ip_address: str | None = None):
+  # 注册
+  try:
+    user = User.register(name,password,email,ip_address)
+    return {"user": user}
+  except Exception as e:
+    return {"error": e}
 
 async def chat_clear(request):
   try:
