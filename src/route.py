@@ -3,6 +3,7 @@ from typing import NoReturn
 from fastapi import FastAPI, Request, WebSocket, HTTPException, Form
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
+from fastapi.responses import JSONResponse
 
 from src.views import chat_index, chat_completion, chat_clear, chat_set_key, signin, signup
 
@@ -46,9 +47,9 @@ async def login(request: Request, username: str = Form(...), password: str = For
     try:
       client_ip = request.client.host
       user = await signin(name=username, password=password, ip_address=client_ip)
-      return {"user": user.to_dict()}
+      return JSONResponse(status_code=200, content={"message": "登录成功", "user": user.to_dict()})
     except Exception as e:
-      raise HTTPException(status_code=401, detail=f"{e}")
+      return JSONResponse(status_code=400, content={"message": "无效的用户名或密码"})
 
 @app.post("/clear_chat")
 async def clear_chat(request: Request):

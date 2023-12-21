@@ -203,14 +203,17 @@ class User:
 # new_user.register(name="John", password="Psd123", email="john.doe@example.com", registration_ip="127.0.0.1")
 
 # 登录用户
-# logged_in_user = User.login(name="John", password="Psd123")
+logged_in_user = User.login(name="John", password="Psd123")
 # if logged_in_user:
 #     print(f"Logged in as: {logged_in_user.name}")
 # else:
 #     print("Login failed")
 # logged_in_user.update(registration_ip='189.169.21.23')
-# print(logged_in_user)
+logged_in_user.update(current_key='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')
+logged_in_user.update(proxy_url='https://chatgpt-api-proxy.cc')
+print(logged_in_user)
 
+        
 # 查询用户
 # all_users = User.query()
 # print("All Users:")

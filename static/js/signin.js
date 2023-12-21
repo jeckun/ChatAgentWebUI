@@ -2,9 +2,8 @@ var userLoggedIn = false;
 
 document.getElementById("loginForm").addEventListener("submit", async function (e) {
     e.preventDefault();
-    var username = document.getElementById('inputUsername').value;
-    // var email = document.getElementById('inputEmail').value;
-    var password = document.getElementById('inputPassword').value;
+    var username = document.getElementById('username').value;
+    var password = document.getElementById('password').value;
 
     const response = await fetch("/signin", {
         method: "POST",
@@ -76,6 +75,30 @@ document.getElementById("registerForm").addEventListener("submit", async functio
         hideContent('user-inf-content');
     }
 });
+
+// function login() {
+//     var formData = new FormData(document.getElementById('loginForm'));
+//     fetch('/login', {
+//         method: 'POST',
+//         body: formData
+//     }).then(response => response.json())
+//       .then(data => alert(data.message))
+        // data => {
+        // if (data.user) {
+        //     document.getElementById('name').innerText = data.user.name;
+        //     document.getElementById('email').innerText = data.user.email;
+        //     document.getElementById('key').value = data.user.current_key;
+        //     document.getElementById('proxy').value = data.user.proxy_url;
+        //     document.getElementById('model').value = data.user.default_model;
+
+        //     userLoggedIn = true;
+        //     hideContent('sign-in-content');
+        //     showContent('user-inf-content');
+        // }
+        // alert(data.message);
+    // })
+//       .catch(error => console.error('Error:', error));
+// }
 
 function signUp() {
     // 点击按钮时切换到注册
