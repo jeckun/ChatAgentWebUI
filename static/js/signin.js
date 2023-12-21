@@ -35,7 +35,7 @@ document.getElementById("loginForm").addEventListener("submit", async function (
 
     } else {
         const errorMessage = await response.text(); // 获取错误消息文本
-        document.getElementById("message").innerText = `Login failed! ${errorMessage}`;
+        document.getElementById("message").json = `Login failed! ${errorMessage.message}`;
         userLoggedIn = false;
         showContent('sign-in-content');
         hideContent('sign-up-content');
@@ -60,15 +60,21 @@ document.getElementById("registerForm").addEventListener("submit", async functio
 
     if (response.ok) {
         const data = await response.json();
-        console.log(data['user']['name'])
         document.getElementById("message").innerText = `Register succeeded!`;
+
+        document.getElementById('name').innerText = data.user.name;
+        document.getElementById('email').innerText = data.user.email;
+        document.getElementById('key').value = data.user.current_key;
+        document.getElementById('proxy').value = data.user.proxy_url;
+        document.getElementById('model').value = data.user.default_model;
+        
         // 界面调整
         userLoggedIn = true;
         hideContent('sign-up-content');
         showContent('user-inf-content');
     } else {
-        const errorMessage = await response.text(); // 获取错误消息文本
-        document.getElementById("message").innerText = `Register failed! ${errorMessage}`;
+        const errorMessage = await response.json(); // 获取错误消息文本
+        document.getElementById("registerMessage").innerText = `Register failed! ${errorMessage.message}`;
         userLoggedIn = false;
         hideContent('sign-in-content');
         showContent('sign-up-content');
@@ -76,31 +82,7 @@ document.getElementById("registerForm").addEventListener("submit", async functio
     }
 });
 
-// function login() {
-//     var formData = new FormData(document.getElementById('loginForm'));
-//     fetch('/login', {
-//         method: 'POST',
-//         body: formData
-//     }).then(response => response.json())
-//       .then(data => alert(data.message))
-        // data => {
-        // if (data.user) {
-        //     document.getElementById('name').innerText = data.user.name;
-        //     document.getElementById('email').innerText = data.user.email;
-        //     document.getElementById('key').value = data.user.current_key;
-        //     document.getElementById('proxy').value = data.user.proxy_url;
-        //     document.getElementById('model').value = data.user.default_model;
-
-        //     userLoggedIn = true;
-        //     hideContent('sign-in-content');
-        //     showContent('user-inf-content');
-        // }
-        // alert(data.message);
-    // })
-//       .catch(error => console.error('Error:', error));
-// }
-
-function signUp() {
+function signUpShow() {
     // 点击按钮时切换到注册
     userLoggedIn = false;
     hideContent('sign-in-content');
@@ -108,7 +90,7 @@ function signUp() {
     hideContent('user-inf-content');
 }
 
-function signin() {
+function signInShow() {
     // 点击按钮时切换到登录
     userLoggedIn = false;
     showContent('sign-in-content');

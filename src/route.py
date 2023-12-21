@@ -36,11 +36,12 @@ def get_client_ip(request: Request):
 @app.post("/signup")
 async def register(request: Request, username: str = Form(...), email: str = Form(...), password: str = Form(...)):
     # 注册
-    client_ip = get_client_ip(request)
-    valimsg = signup(name=username, email=email, password=password, ip_address=client_ip)
-    if valimsg:
-        raise HTTPException(status_code=400, detail="Username already registered")
-    return {"message": "User registered successfully", "user": str(valimsg['user'])}
+    try:
+      client_ip = get_client_ip(request)
+      user = await signup(name=username, email=email, password=password, ip_address=client_ip)
+      return JSONResponse(status_code=200, content={"message": "登录成功", "user": user.to_dict()})
+    except Exception as e:
+      return JSONResponse(status_code=400, content={"message": f"{e}"})
 
 @app.post("/signin")
 async def login(request: Request, username: str = Form(...), password: str = Form(...)):
@@ -49,7 +50,7 @@ async def login(request: Request, username: str = Form(...), password: str = For
       user = await signin(name=username, password=password, ip_address=client_ip)
       return JSONResponse(status_code=200, content={"message": "登录成功", "user": user.to_dict()})
     except Exception as e:
-      return JSONResponse(status_code=400, content={"message": "无效的用户名或密码"})
+      return JSONResponse(status_code=400, content={"message": f"{e}"})
 
 @app.post("/clear_chat")
 async def clear_chat(request: Request):
