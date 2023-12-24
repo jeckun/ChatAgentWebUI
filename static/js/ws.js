@@ -49,11 +49,11 @@ function connectWebSocket() {
 connectWebSocket();
 
 // 发送消息到服务器
-function sendMessage(message) {
-    // 检查 WebSocket 的 readyState，如果为 OPEN，则发送消息
+function sendMessagetoChat(message) {
     if (ws.readyState === WebSocket.OPEN) {
         console.log("send message:", message)
-        ws.send(message);
+        const jsonMessage = JSON.stringify(message);
+        ws.send(jsonMessage);
     } else {
         console.warn('WebSocket连接未打开，无法发送消息。');
         connectWebSocket();

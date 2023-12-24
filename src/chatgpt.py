@@ -8,9 +8,8 @@ class ChatGPT:
         self.memory = memory
 
     # 流式响应，处理发给用户的消息
-    async def get_response(self, user_id: str, text: str):
-        await self.memory.append(user_id, {'role': 'user', 'content': text})
-        return await self.model.chat_completion(await self.memory.get(user_id))
+    async def get_response(self, currentSession):
+        return await self.model.chat_completion(await currentSession.getMessage())
     
     async def clean_history(self, user_id: str) -> None:
         await self.memory.remove(user_id)

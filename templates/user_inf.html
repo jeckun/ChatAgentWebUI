@@ -27,10 +27,12 @@
                         <input type="text" class="form-control" id="model" readonly>
                     </div>
                 </div>
-                
                 <div class="text-center my-1">
-                    <button type="button" class="btn btn-secondary btn-block" onclick="edit()">Edit</button>
+                    <button type="button" class="btn btn-secondary btn-block" id="edit-user-inf" onclick="editUserInf()">Edit</button>
+                    <button type="button" class="btn btn-primary btn-block hidden" id="save-user-inf" onclick="saveUserInf()">Save</button>
+                    <button type="button" class="btn btn-secondary btn-block" id="user-logout" onclick="userLogout()">Logout</button>
                 </div>
+                <div><p id="usermessage"></p></div>
             </form>
         </div>
     </div>

@@ -45,6 +45,7 @@ conn.commit()
 
 class User:
     def __init__(self, name=None, password=None, email=None, registration_ip=None): 
+        self._id = None
         self.name = name
         self.password = password
         self.email = email
@@ -104,6 +105,19 @@ class User:
         cursor.execute("SELECT COUNT(*) FROM user WHERE name = ?", (self.name,))
         if cursor.fetchone()[0] > 0:
             raise FileExistsError("User with the same name already exists")
+        
+    @property
+    def id(self):
+        if self._id is None and self.email:
+            cursor.execute("SELECT id FROM user WHERE email=?", (self.email,))
+            result = cursor.fetchone()
+            if result:
+                self._id = result[0]
+        return self._id
+    
+    @id.setter
+    def id(self, value):
+        self._id = value
 
     def save(self, update=False):
         # 保存数据
@@ -117,6 +131,13 @@ class User:
               self.registration_date, self.expiration_date, self.current_key, self.proxy_url,
               self.default_model, self.avatar_link))
         conn.commit()
+    
+    @staticmethod
+    def delete(name:str|None=None, email: str|None=None):
+        cursor.execute('''
+        DELETE FROM user WHERE name = ? or email = ?
+        ''', (name, email))
+        conn.commit
 
     def set_user_inf(self, **kwargs):
         # 更新属性
@@ -141,6 +162,7 @@ class User:
         user.expiration_date = (datetime.now() + timedelta(days=365)).strftime('%Y-%m-%d %H:%M:%S')
         user.validate()
         user.save()
+        user.id = user.id
         return user
 
     @staticmethod
@@ -151,7 +173,7 @@ class User:
         query = "SELECT * FROM user WHERE (name = ? or email = ?) AND password = ?"
         cursor.execute(query, (name, name, password))
         user_data = cursor.fetchone()
-
+        
         if user_data:
             user = User(
                 name=user_data[1],
@@ -159,6 +181,7 @@ class User:
                 email=user_data[3],
                 registration_ip=user_data[6]
             )
+            user.id = user_data[0]
             user.is_valid = bool(user_data[5])
             user.role = user_data[4]
             user.registration_date = user_data[7]
@@ -185,7 +208,9 @@ class User:
         user_list = []
         for user_data in cursor.fetchall():
             user_info = {
+                'id': user_data[0],
                 'name': user_data[1],
+                'password': user_data[2],
                 'email': user_data[3],
                 'registration_date': user_data[7],
                 'is_valid': bool(user_data[5]),
@@ -202,18 +227,20 @@ class User:
 # new_user = User()
 # new_user.register(name="John", password="Psd123", email="john.doe@example.com", registration_ip="127.0.0.1")
 
+# 删除用户
+# User.delete('John')
+
 # 登录用户
-logged_in_user = User.login(name="John", password="Psd123")
+# logged_in_user = User.login(name="John", password="Psd123")
 # if logged_in_user:
-#     print(f"Logged in as: {logged_in_user.name}")
+#     print(f"Logged in user:", logged_in_user)
 # else:
 #     print("Login failed")
 # logged_in_user.update(registration_ip='189.169.21.23')
-logged_in_user.update(current_key='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')
-logged_in_user.update(proxy_url='https://chatgpt-api-proxy.cc')
-print(logged_in_user)
+# logged_in_user.update(current_key='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')
+# logged_in_user.update(proxy_url='https://chatgpt-api-proxy.cc')
+# print(logged_in_user)
 
-        
 # 查询用户
 # all_users = User.query()
 # print("All Users:")

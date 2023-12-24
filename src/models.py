@@ -35,16 +35,16 @@ class OpenAIModel(ModelInterface):
         stream=True,
     )
 
-  def set_api_key(self, api_key: str) -> None:
+  def set_api_key(self, api_key: str):
     self.client.api_key = api_key
 
-  def set_api_proxy(self, api_proxy: str | None = None) -> None:
+  def set_api_proxy(self, api_proxy: str | None = None):
     self.client.base_url = api_proxy
 
-  def set_model_engine(self, moel_engine: str) -> None:
+  def set_model_engine(self, moel_engine: str):
     self.model_engine = moel_engine
 
-  def set_image_size(self, image_size: str = '512x512') -> None:
+  def set_image_size(self, image_size: str = '512x512'):
     self.image_size = image_size
 
   def image_generation(self, prompt: str) -> str:
